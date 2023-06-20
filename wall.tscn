@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://hc7ngc37b6hp"]
+
+[ext_resource type="Shader" path="res://wall.gdshader" id="1_6l6xa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22qym"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gto6r"]
+shader = ExtResource("1_6l6xa")
+
+[sub_resource type="QuadMesh" id="QuadMesh_v8toj"]
+size = Vector2(20, 20)
+
+[node name="Wall" type="StaticBody2D"]
+position = Vector2(464, 450)
+scale = Vector2(20.12, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_22qym")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_gto6r")
+mesh = SubResource("QuadMesh_v8toj")

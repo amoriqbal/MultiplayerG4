@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://ryb0yqbvltrj"]
+
+[ext_resource type="PackedScene" uid="uid://hc7ngc37b6hp" path="res://wall.tscn" id="1_pxwy3"]
+
+[node name="World" type="Node2D"]
+z_index = -1
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(77, 78, 1076, 75, 1078, 592, 88, 584)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("1_pxwy3")]
+
+[node name="Wall2" parent="Walls" instance=ExtResource("1_pxwy3")]
+position = Vector2(522, 381)
+rotation = 1.5708
