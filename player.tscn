@@ -1,15 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://fisqpxmgokxn"]
+[gd_scene load_steps=6 format=3 uid="uid://fisqpxmgokxn"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_ssk65"]
-[ext_resource type="Shader" path="res://wall.gdshader" id="2_njwm2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsk6x"]
 radius = 30.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hssr6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_elbqw"]
-shader = ExtResource("2_njwm2")
 
 [sub_resource type="SphereMesh" id="SphereMesh_mavu1"]
 radius = 30.0
@@ -46,7 +42,6 @@ scale = Vector2(2.24, 2.24)
 shape = SubResource("CircleShape2D_hssr6")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-material = SubResource("ShaderMaterial_elbqw")
 mesh = SubResource("SphereMesh_mavu1")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
