@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhwl44binfimn"]
+
+[ext_resource type="Script" path="res://PathFollow2D.gd" id="1_nloup"]
+[ext_resource type="PackedScene" uid="uid://b0t3ucfrj07he" path="res://tectonic_ellipse.tscn" id="2_4u0m1"]
+
+[sub_resource type="Curve2D" id="Curve2D_n4jfd"]
+_data = {
+"points": PackedVector2Array(-315.412, 189.696, 315.412, -189.696, 149, 100, -26.9391, -167.247, 26.9391, 167.247, 765, 254, 285.105, 56.1231, -285.105, -56.1231, 353, 514, -129.083, 94.2868, 129.083, -94.2868, 149, 100)
+}
+point_count = 4
+
+[node name="Path2D" type="Path2D"]
+curve = SubResource("Curve2D_n4jfd")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(149, 100)
+rotation = -0.541466
+script = ExtResource("1_nloup")
+pathFollowSpeed = 0.1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PathFollow2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFollow2D"]
+position = Vector2(87.9827, 160.272)
+polygon = PackedVector2Array(-61.6855, -215.638, -131.675, -198.219, -109.803, -122.05, -28.6607, -144.432)
+
+[node name="111972" type="Timer" parent="PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="TectonicPlate" parent="." instance=ExtResource("2_4u0m1")]
+mass = 500.0
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+node_a = NodePath("../TectonicPlate")
+node_b = NodePath("../PathFollow2D/StaticBody2D")
+length = 1.0
+stiffness = 28.1
+damping = 4.02
