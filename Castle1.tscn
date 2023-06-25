@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dstyq7636g7pb"]
+
+[ext_resource type="PackedScene" uid="uid://bsey3vqu63wq2" path="res://CastleBlock.tscn" id="1_5kj3x"]
+
+[sub_resource type="GDScript" id="GDScript_y4cmr"]
+resource_name = "Castle.gd"
+script/source = "extends Node2D
+func _enter_tree():
+	set_multiplayer_authority(1)
+"
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nhq7w"]
+properties/0/path = NodePath("CastleBlocks/CastleBlock:occupant")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("CastleBlocks/CastleBlock2:occupant")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("CastleBlocks/CastleBlock3:occupant")
+properties/2/spawn = true
+properties/2/sync = true
+
+[node name="Castle" type="Node2D"]
+script = SubResource("GDScript_y4cmr")
+
+[node name="CastleBlocks" type="Node2D" parent="."]
+
+[node name="CastleBlock" parent="CastleBlocks" instance=ExtResource("1_5kj3x")]
+
+[node name="CastleBlock2" parent="CastleBlocks" instance=ExtResource("1_5kj3x")]
+position = Vector2(-164, 0)
+
+[node name="CastleBlock3" parent="CastleBlocks" instance=ExtResource("1_5kj3x")]
+position = Vector2(165, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nhq7w")

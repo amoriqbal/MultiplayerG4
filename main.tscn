@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dro5llfsjspeu"]
+[gd_scene load_steps=3 format=3 uid="uid://dro5llfsjspeu"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_q1xqe"]
+[ext_resource type="PackedScene" uid="uid://r3c3otoh7g8p" path="res://world_tectonic_static.tscn" id="2_7qgxu"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_q1xqe")
+WorldScene = ExtResource("2_7qgxu")
 
 [node name="ConnectUI" type="Panel" parent="."]
 unique_name_in_owner = true

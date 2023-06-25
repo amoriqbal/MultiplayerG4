@@ -1,6 +1,5 @@
 extends Node
 const port:int = 5000
-
 @export
 var PlayerScene:PackedScene = preload("res://player.tscn")
 @export
@@ -23,7 +22,7 @@ func startServer():
 	multiplayer.peer_connected.connect(onClientConnected)
 	multiplayer.peer_disconnected.connect(onClientDisconnected)
 	
-	#loadWorld()
+	loadWorld()
 
 func startClient():
 	var peer = ENetMultiplayerPeer.new()
@@ -33,10 +32,11 @@ func startClient():
 	multiplayer.connected_to_server.connect(onConnectedToServer)
 
 func onConnectedToServer():
+	var GlobalNode = get_node("/root/Global")
 	var id = multiplayer.get_unique_id()
 	print("Connected to server")
 	loadWorld()
-	addPlayer.rpc_id(1, id)
+	addPlayer.rpc_id(1, id, GlobalNode.getSpawnPos())
 	
 
 func loadWorld():
@@ -51,13 +51,13 @@ func onClientDisconnected(id:int):
 	removePlayer(id)
 
 @rpc("any_peer")
-func addPlayer(id:int):
+func addPlayer(id : int, pos : Vector2 = Vector2.ZERO):
 	var player = PlayerScene.instantiate()
 	player.name = str(id)
+	player.position = pos
 	%SpawnPositions.add_child(player)
 
 @rpc("any_peer")
 func removePlayer(id:int):
 	var player = %SpawnPositions.find_child(str(id))
 	player.queue_free()
-

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://r3c3otoh7g8p"]
+
+[ext_resource type="PackedScene" uid="uid://b0t3ucfrj07he" path="res://tectonic_ellipse.tscn" id="1_23w7y"]
+[ext_resource type="PackedScene" uid="uid://dstyq7636g7pb" path="res://Castle1.tscn" id="3_d0m38"]
+
+[node name="World" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-8204.0, -3295.0, -4898.0, -5402.0]
+metadata/_edit_horizontal_guides_ = [-871.0]
+
+[node name="TectonicPlate" parent="." instance=ExtResource("1_23w7y")]
+position = Vector2(318, 242)
+pscale = Vector2i(10, 10)
+
+[node name="TectonicPlate2" parent="." instance=ExtResource("1_23w7y")]
+position = Vector2(6692, 1467)
+pscale = Vector2i(15, 15)
+
+[node name="TectonicPlate3" parent="." instance=ExtResource("1_23w7y")]
+position = Vector2(690, 6542)
+pscale = Vector2i(25, 25)
+
+[node name="Castle" parent="." instance=ExtResource("3_d0m38")]
+position = Vector2(498, 240)

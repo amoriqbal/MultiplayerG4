@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsey3vqu63wq2"]
+
+[ext_resource type="Texture2D" uid="uid://wgfw3j5v774v" path="res://rect111.png" id="1_na5bj"]
+
+[sub_resource type="GDScript" id="GDScript_nr0t6"]
+script/source = "extends StaticBody2D
+
+@export
+var occupant : String = \"\":
+	get:
+		return occupant
+
+@rpc(\"any_peer\")
+func setOccupant(occupantPLayerName:String):
+	if not is_multiplayer_authority(): return
+	occupant = occupantPLayerName
+"
+
+[sub_resource type="GDScript" id="GDScript_3fe3q"]
+resource_name = "FortArea.gd"
+script/source = "extends Area2D
+
+func getCastleBlock():
+	return get_parent()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao8p7"]
+radius = 63.68
+
+[node name="CastleBlock" type="StaticBody2D"]
+script = SubResource("GDScript_nr0t6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_na5bj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(2.4, 2.4)
+polygon = PackedVector2Array(19, -18, -19, -18, -19, 18, 19, 18, 19, 13, -14, 13, -14, -14, 14, -14, 14, 13, 19, 13)
+
+[node name="FortArea" type="Area2D" parent="."]
+collision_mask = 0
+script = SubResource("GDScript_3fe3q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FortArea"]
+shape = SubResource("CircleShape2D_ao8p7")

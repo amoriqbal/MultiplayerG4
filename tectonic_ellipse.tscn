@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0t3ucfrj07he"]
+
+[sub_resource type="GDScript" id="GDScript_fy624"]
+script/source = "@tool
+extends RigidBody2D
+
+@export
+var pscale:Vector2i = Vector2i.ONE:
+	set(value):
+		pscale = value
+		$CollisionShape2D.scale = value
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_53gfi"]
+radius = 162.29
+
+[sub_resource type="SphereMesh" id="SphereMesh_hmfib"]
+radius = 160.0
+height = 320.0
+
+[node name="TectonicPlate" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+mass = 1000.0
+gravity_scale = 0.0
+angular_damp_mode = 1
+angular_damp = 10.591
+script = SubResource("GDScript_fy624")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_53gfi")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CollisionShape2D"]
+modulate = Color(0.313726, 0.34902, 0.176471, 1)
+mesh = SubResource("SphereMesh_hmfib")
