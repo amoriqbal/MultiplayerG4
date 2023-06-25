@@ -1,13 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://fisqpxmgokxn"]
+[gd_scene load_steps=6 format=3 uid="uid://fisqpxmgokxn"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_ssk65"]
-[ext_resource type="Shader" path="res://wall.gdshader" id="2_njwm2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsk6x"]
 radius = 30.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_elbqw"]
-shader = ExtResource("2_njwm2")
+[sub_resource type="CircleShape2D" id="CircleShape2D_hssr6"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_mavu1"]
 radius = 30.0
@@ -17,16 +15,33 @@ height = 60.0
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/1/path = NodePath(".:health")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_ssk65")
 
+[node name="Body" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("CircleShape2D_lsk6x")
+debug_color = Color(0.894118, 0, 0.776471, 0.32549)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lsk6x")
 
+[node name="MeleeRange" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeRange"]
+position = Vector2(30, 0)
+scale = Vector2(2.24, 2.24)
+shape = SubResource("CircleShape2D_hssr6")
+
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-material = SubResource("ShaderMaterial_elbqw")
 mesh = SubResource("SphereMesh_mavu1")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

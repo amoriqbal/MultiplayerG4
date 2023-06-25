@@ -6,6 +6,8 @@ var PlayerScene:PackedScene = preload("res://player.tscn")
 @export
 var WorldScene:PackedScene = preload("res://world.tscn")
 
+var playerObjects := {}
+
 func _on_host_button_pressed():
 	%ConnectUI.visible = false
 	startServer()
@@ -55,9 +57,14 @@ func addPlayer(id:int):
 	var player = PlayerScene.instantiate()
 	player.name = str(id)
 	%SpawnPositions.add_child(player)
+	playerObjects[player] = id
 
 @rpc("any_peer")
 func removePlayer(id:int):
 	var player = %SpawnPositions.find_child(str(id))
 	player.queue_free()
+	playerObjects.erase(player)
+	
+func get_peer_id(player: Node) -> int:
+	return playerObjects[player]
 
